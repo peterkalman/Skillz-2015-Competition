@@ -1,0 +1,413 @@
+﻿def do_turn(game):
+    island0 = game.islands()[0]
+    island1 = game.islands()[1]
+    island2 = game.islands()[2]
+    island3 = game.islands()[3]
+    island4 = game.islands()[4]
+
+##    pirate = game.get_my_pirate(0)
+##    game.debug(pirate)
+##    island = game.get_island(3)
+##    game.debug(island)
+##    direction = game.get_directions(pirate, island)[0]
+##    game.set_sail(pirate, direction)
+    
+
+##    for i in xrange(3):
+##        pirate = game.get_my_pirate(i)
+##        game.debug(pirate)
+##        island = game.get_island(3)
+##        game.debug(island)
+##        direction = game.get_directions(pirate, island)[0]
+##        game.set_sail(pirate, direction)
+
+    if game.get_island(4).owner == game.ME:
+        for i in xrange(3):
+            pirate = game.get_my_pirate(i)
+            game.debug(pirate)
+            island = game.get_island(3)
+            game.debug(island)
+            direction = game.get_directions(pirate, island)[0]
+            game.set_sail(pirate, direction)
+    else:
+        for i in xrange(3):
+            pirate = game.get_my_pirate(i)
+            game.debug(pirate)
+            island = game.get_island(4)
+            game.debug(island)
+            direction = game.get_directions(pirate, island)[0]
+            game.set_sail(pirate, direction)
+
+    if game.get_island(0).owner == game.ME:
+        for i in xrange(3,6):
+            pirate = game.get_my_pirate(i)
+            game.debug(pirate)
+            island = game.get_island(2)
+            game.debug(island)
+            direction = game.get_directions(pirate, island)[0]
+            game.set_sail(pirate, direction)
+    else:
+        for i in xrange(3,6):
+            pirate = game.get_my_pirate(i)
+            game.debug(pirate)
+            island = game.get_island(0)
+            game.debug(island)
+            direction = game.get_directions(pirate, island)[0]
+            game.set_sail(pirate, direction)
+        
+    
+    if len(game.not_my_islands()) == 0:
+        return
+
+   
+
+    
+
+##    for i in xrange(2):
+##        pirate = game.get_my_pirate(i)
+##        direction = game.get_directions(pirate0, island3)[0]
+##        direction = game.get_directions(pirate1, island3)[0]
+##        if game.destination(pirate0, direction)[0] == island0.location()[0] and game.destination(pirate0, direction)[1] == island0.location()[1]:
+##            if game.destination(pirate1, direction)[0] == island0.location()[0] and game.destination(pirate1, direction)[1] == island0.location()[1]:
+##                pass
+##        else:
+##            game.set_sail(pirate0, direction)
+##            game.set_sail(pirate1, direction)
+##            game.debug("going to island " + str(island3.id))
+##
+##    
+##    for i in xrange(3):
+##        pirate = game.get_my_pirate(i)
+##        direction = game.get_directions(pirate, island0)[0]
+##        game.set_sail(pirate2, direction)
+##        game.set_sail(pirate3, direction)
+##        game.set_sail(pirate4, direction)
+##        game.debug("going to island " + str(island0.id))
+1 NiceGuys
+אור שקורי
+יובל עקביאן
+דין בכר
+אוהד שוורץ
+def do_turn(game):
+    if len(game.not_my_islands()) == 0:
+        return
+    
+    ##game.debug("going to island " + str(island.id))
+    if(game.get_turn()%35==0):
+        pirates = game.my_pirates()
+        for i in xrange(len(pirates)):  
+            for pirate in pirates:
+                islands=game.not_my_islands()
+                for j in xrange(len(islands)):
+                    for k in xrange(j+1, len(islands)):
+                        if(game.distance(pirate, islands[k])< game.distance(pirate, islands[j])):
+                            temp=islands[j]
+                            islands[j]=islands[k]
+                            islands[k]=temp
+                if(len(islands)>=2):            
+                    if(i>=2):
+                        direction = game.get_directions(pirates[i], islands[0])[0]
+                    else:
+                        direction = game.get_directions(pirates[i], islands[len(islands)-1])[0]
+                else:
+                    direction = game.get_directions(pirate[i], islands[0])[0]
+                game.set_sail(pirates[i], direction)
+    else:
+        isl=game.islands()
+        islands=game.not_my_islands()
+        x=0
+        d=[]
+        p=[]
+        p.append(game.get_my_pirate(0))
+        p.append(game.get_my_pirate(1))
+        p.append(game.get_my_pirate(2))
+        p.append(game.get_my_pirate(3))
+        p.append(game.get_my_pirate(4))
+        p.append(game.get_my_pirate(5))
+        if not game.is_capturing(p[0]) and not game.is_capturing(p[1]) and not game.is_capturing(p[2]):
+            direction = game.get_directions(p[0], islands[len(islands)-1])[0]
+            game.set_sail(p[0], direction)
+            direction = game.get_directions(p[1], islands[len(islands)-1])[0]
+            game.set_sail(p[1], direction) 
+            direction = game.get_directions(p[2], islands[len(islands)-1])[0]
+            game.set_sail(p[2], direction)
+        if not game.is_capturing(p[3]) and not game.is_capturing(p[4]) and not game.is_capturing(p[5]): 
+            direction = game.get_directions(p[3], islands[len(islands)-2])[0]
+            game.set_sail(p[3], direction)
+            direction = game.get_directions(p[4], islands[len(islands)-2])[0]
+            game.set_sail(p[4], direction) 
+            direction = game.get_directions(p[5], islands[len(islands)-2])[0]
+            game.set_sail(p[5], direction)
+    
+2 קפטן הוק
+דביר קמחי
+סתיו נחום
+אורי חוגי
+def do_turn(game):
+    if(len(game.not_my_islands()) == 0):
+        return
+    if(len(game.not_my_islands()) > 1):
+        island1 = game.not_my_islands()[0]
+        island2 = game.not_my_islands()[1]
+        game.debug("going to island " + str(island1.id))
+        game.debug("going to island " + str(island2.id))
+        pirates = game.my_pirates()
+        if (len(game.enemy_lost_pirates()) >= 4 and len(game.my_pirates()) >= 3):
+            k = 0
+            j = game.not_my_islands()
+            for i in xrange(len(game.my_pirates())):
+                if(not(game.is_capturing(pirates[i]))):
+                    game.debug("going to island " + str(j[k].id))
+                    direction = game.get_directions(pirates[i], j[k])[0]
+                    game.set_sail(pirates[i], direction)
+                    if(k < len(game.not_my_islands())-1):
+                        k += 1
+        else:
+            for i in xrange(len(pirates)/2):
+                if(not(game.is_capturing(pirates[i]))):
+                    direction = game.get_directions(pirates[i], island1)[0]
+                    game.set_sail(pirates[i], direction)
+            for i in xrange(len(pirates)/2):
+                if(not(game.is_capturing(pirates[i+ len(pirates)/2]))):
+                    direction = game.get_directions(pirates[i + len(pirates)/2], island2)[0]
+                    game.set_sail(pirates[i + len(pirates)/2], direction)
+        return
+    else:
+        island1 = game.not_my_islands()[0]
+        game.debug("going to island " + str(island1.id))
+        pirates = game.my_pirates()
+        for i in xrange(len(pirates)):
+            direction = game.get_directions(pirates[i], island1)[0]
+            game.set_sail(pirates[i], direction)
+        return
+
+
+5 megapirate
+tomer
+liron
+sam
+peter
+def do_turn(game):
+
+    if len(game.not_my_islands()) ==0:
+        return
+    isl=game.islands()
+    p=[]
+    p.append(game.get_my_pirate(0))
+    p.append(game.get_my_pirate(1))
+    p.append(game.get_my_pirate(2))
+    p.append(game.get_my_pirate(3))
+    p.append(game.get_my_pirate(4))
+    p.append(game.get_my_pirate(5))
+    if not game.is_capturing(p[0]) and not game.is_capturing(p[1]) and not game.is_capturing(p[2]):
+        if isl[3].owner!=0:
+            direction = game.get_directions(p[0], isl[3])[0]
+            game.set_sail(p[0], direction)
+            direction = game.get_directions(p[1], isl[3])[0]
+            game.set_sail(p[1], direction) 
+            direction = game.get_directions(p[2], isl[3])[0]
+            game.set_sail(p[2], direction)
+            game.debug(isl[3].owner)
+        elif isl[1].owner!=0:
+            direction = game.get_directions(p[0], isl[1])[0]
+            game.set_sail(p[0], direction)
+            direction = game.get_directions(p[1], isl[1])[0]
+            game.set_sail(p[1], direction) 
+            direction = game.get_directions(p[2], isl[1])[0]
+            game.set_sail(p[2], direction)
+        elif isl[4].owner!=0:
+            direction = game.get_directions(p[0], isl[4])[0]
+            game.set_sail(p[0], direction)
+            direction = game.get_directions(p[1], isl[4])[0]
+            game.set_sail(p[1], direction) 
+            direction = game.get_directions(p[2], isl[4])[0]
+            game.set_sail(p[2], direction)
+    if not game.is_capturing(p[3]) and not game.is_capturing(p[4]) and not game.is_capturing(p[5]):
+        if isl[0].owner!=0:
+            direction = game.get_directions(p[3], isl[0])[0]
+            game.set_sail(p[3], direction)
+            direction = game.get_directions(p[4], isl[0])[0]
+            game.set_sail(p[4], direction) 
+            direction = game.get_directions(p[5], isl[0])[0]
+            game.set_sail(p[5], direction)
+        elif isl[2].owner!=0:
+            direction = game.get_directions(p[3], isl[2])[0]
+            game.set_sail(p[3], direction)
+            direction = game.get_directions(p[4], isl[2])[0]
+            game.set_sail(p[4], direction) 
+            direction = game.get_directions(p[5], isl[2])[0]
+            game.set_sail(p[5], direction)
+        elif isl[4].owner!=0:
+            direction = game.get_directions(p[3], isl[4])[0]
+            game.set_sail(p[3], direction)
+            direction = game.get_directions(p[4], isl[4])[0]
+            game.set_sail(p[4], direction) 
+            direction = game.get_directions(p[5], isl[4])[0]
+            game.set_sail(p[5], direction)
+##    else:
+##        if not game.is_capturing(p[0]) and not game.is_capturing(p[1]) and not game.is_capturing(p[2]):
+##            if isl[4].owner!=0:
+##                direction = game.get_directions(p[0], isl[4])[0]
+##                game.set_sail(p[0], direction)
+##                direction = game.get_directions(p[1], isl[4])[0]
+##                game.set_sail(p[1], direction) 
+##                direction = game.get_directions(p[2], isl[4])[0]
+##                game.set_sail(p[2], direction)
+##                game.debug(isl[3].owner)
+##            elif isl[2].owner!=0:
+##                direction = game.get_directions(p[0], isl[2])[0]
+##                game.set_sail(p[0], direction)
+##                direction = game.get_directions(p[1], isl[2])[0]
+##                game.set_sail(p[1], direction) 
+##                direction = game.get_directions(p[2], isl[2])[0]
+##                game.set_sail(p[2], direction)
+##            elif isl[3].owner!=0:
+##                direction = game.get_directions(p[0], isl[3])[0]
+##                game.set_sail(p[0], direction)
+##                direction = game.get_directions(p[1], isl[3])[0]
+##                game.set_sail(p[1], direction) 
+##                direction = game.get_directions(p[2], isl[3])[0]
+##                game.set_sail(p[2], direction)
+##        if not game.is_capturing(p[3]) and not game.is_capturing(p[4]) and not game.is_capturing(p[5]):
+##            if isl[0].owner!=0:
+##                direction = game.get_directions(p[3], isl[0])[0]
+##                game.set_sail(p[3], direction)
+##                direction = game.get_directions(p[4], isl[0])[0]
+##                game.set_sail(p[4], direction) 
+##                direction = game.get_directions(p[5], isl[0])[0]
+##                game.set_sail(p[5], direction)
+##            elif isl[2].owner!=0:
+##                direction = game.get_directions(p[3], isl[1])[0]
+##                game.set_sail(p[3], direction)
+##                direction = game.get_directions(p[4], isl[1])[0]
+##                game.set_sail(p[4], direction) 
+##                direction = game.get_directions(p[5], isl[1])[0]
+##                game.set_sail(p[5], direction)
+##            elif isl[4].owner!=0:
+##                direction = game.get_directions(p[3], isl[3])[0]
+##                game.set_sail(p[3], direction)
+##                direction = game.get_directions(p[4], isl[3])[0]
+##                game.set_sail(p[4], direction) 
+##                direction = game.get_directions(p[5], isl[3])[0]
+##                game.set_sail(p[5], direction)
+        
+        
+        
+        pass
+
+
+
+2 arr
+michal ben avraham
+ron geva
+mor jacob
+amitay ozery
+import math  
+def Find_Shortest(distances): ##find shortest distance in list of distances   
+    shortest = distances[0]
+    answer = 0
+    for i in xrange(len(distances)):
+        if distances[i] < shortest:
+            answer = i
+    return answer
+          
+def do_turn(game):
+    if len(game.not_my_islands())==0:
+        return
+           
+    pirates = game.my_pirates()
+    islands = game.not_my_islands()
+    for i in xrange(len(pirates)):
+        evil_pirates = game.enemy_pirates()
+        dangers = 0
+        helpers = -1
+        direction=''
+        for baddy in evil_pirates:
+            if(game.distance(pirates[i],baddy)<5):
+                dangers = int(dangers) + 1
+                x =  pirates[i].location[1] - baddy.location[1]
+                y =  pirates[i].location[0] - baddy.location[0]                                                                                                                 
+                if(math.fabs(x) > math.fabs(y)):
+                    if(x<0):
+                        direction = 'w'
+                    else:
+                        direction = 'e'
+                else:
+                    if(y<0):
+                        direction = 's'
+                    else:
+                        direction = 'n'
+        for pirate in pirates:
+            x = pirates[i].location[1] - pirate.location[1]
+            y = pirates[i].location[0] - pirate.location[0]
+            if((direction=='w')and ((math.fabs(y)<4)and (x<0 and x>-3))):
+                helpers = int(helpers) + 1
+            if((direction=='e')and ((math.fabs(y)<4)and (x<3 and x>0))):
+                helpers = int(helpers) + 1
+            if((direction=='n')and ((math.fabs(x)<4)and (y>3 and y<0))):
+                helpers = int(helpers) + 1
+            if((direction=='s')and ((math.fabs(x)<4)and (y>0 and y<-3))):
+                helpers = int(helpers) + 1
+        if(dangers==0 or helpers >= dangers):
+            if(i > len(islands)):
+                distances = []
+                islands = game.islands()   
+                for j in xrange(len(islands)):
+                    distances.append(game.distance(pirates[i], islands[j]))
+                shortest = Find_Shortest(distances)
+                island = islands[shortest]
+                game.debug("going to island " + str(island.id))
+                direction = game.get_directions(pirates[i], island)[0]
+                game.set_sail(pirates[i], direction)
+            else:
+                distances = []
+                for j in xrange(len(islands)):
+                    distances.append(game.distance(pirates[i], islands[j]))
+                shortest = Find_Shortest(distances)
+                island = islands[shortest]
+                game.debug("going to island " + str(island.id))
+                direction = game.get_directions(pirates[i], island)[0]
+                game.set_sail(pirates[i], direction)
+                islands.pop(j)
+        else:
+            game.set_sail(pirates[i], direction)
+2 הפרלמנט
+אייל דוידוב
+שני דניאל
+שר דלרהים
+def do_turn(game):
+
+    if len(game.my_islands()) == 5:
+        return
+    if len(game.neutral_islands()) == 0:
+        islands = game.not_my_islands()
+    else:
+        islands = game.neutral_islands()
+    if len(game.neutral_islands()) == 1:
+        islands = islands + game.not_my_islands()
+    islands = game.not_my_islands()
+    pirates = game.my_pirates()
+
+    if len(pirates) >= 1:
+        # Finding closest Island
+        min_dis = islands[0]
+        for isl in islands:
+            if game.distance(min_dis,pirates[0]) > game.distance(isl,pirates[0]):
+                min_dis = isl
+        game.debug("going to " + str(min_dis.id))
+        islands.remove(min_dis)
+        
+        #Finding second closest island
+        min_dis2 = islands[0]
+        for isl in islands:
+            if game.distance(min_dis2,pirates[0]) > game.distance(isl,pirates[0]):
+                min_dis2 = isl
+            
+        game.debug("going to " + str(min_dis2.id) + " and " + str(min_dis.id))
+    
+        for i in xrange(len(pirates) - 2):
+            direction = game.get_directions(pirates[i], min_dis)[0]
+            game.set_sail(pirates[i], direction)
+            direction = game.get_directions(pirates[i+2], min_dis2)[0]
+            game.set_sail(pirates[i+2], direction)
+    
